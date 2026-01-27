@@ -1,0 +1,199 @@
+:root {
+    --bg: #fdf0f4;
+    --accent: #ff8fa3;
+    --primary: #4a4e69;
+    --glass: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); overflow: hidden; color: var(--primary); }
+
+/* BACKGROUND ANIMASI */
+.blob-bg { position: fixed; inset: 0; z-index: -1; filter: blur(70px); }
+.blob { position: absolute; width: 60vw; height: 60vw; background: var(--accent); opacity: 0.3; border-radius: 50%; animation: move 20s infinite alternate; }
+.blob:nth-child(2) { background: #c8b6ff; right: -10%; bottom: -10%; animation-delay: -5s; }
+@keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(10%, 10%); } }
+
+/* GLASS SYSTEM */
+.stage { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.6s; z-index: 10; padding: 20px; }
+.stage.active { opacity: 1; visibility: visible; }
+
+.glass-container, .main-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border-radius: 35px;
+    padding: 40px 25px;
+    width: 90%; /* Pake persen biar gak mentok layar */
+    max-width: 380px; /* Ini batas maksimal pas di HP */
+    /* ... sisa kode lainnya ... */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.05);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+}
+
+/* KADO */
+.gift-box { width: 140px; height: 120px; background: #ff4d6d; margin: 50px auto 20px; position: relative; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+.lid { position: absolute; width: 160px; height: 35px; background: #ff758c; top: -15px; left: -10px; border-radius: 8px; z-index: 2; transition: 0.6s; }
+.ribbon-v { position: absolute; width: 30px; height: 100%; background: #fff; left: 50%; transform: translateX(-50%); }
+
+/* KUE PREMIUM & API */
+.cake { position: relative; width: 180px; height: 160px; margin: 20px auto; cursor: pointer; }
+.layer-cake { width: 100%; height: 80px; background: #f4d35e; position: absolute; bottom: 0; border-radius: 12px; box-shadow: inset 0 -8px 0 rgba(0,0,0,0.1); }
+.icing { width: 110%; height: 25px; background: #fff; position: absolute; top: 70px; left: -5%; border-radius: 20px; }
+.candle { width: 10px; height: 45px; background: #ff8fa3; position: absolute; top: 30px; left: 50%; transform: translateX(-50%); border-radius: 4px; background: repeating-linear-gradient(45deg, #ff8fa3, #ff8fa3 5px, #fff 5px, #fff 10px); }
+
+#flame {
+    width: 16px; height: 24px;
+    background: linear-gradient(to bottom, #fff, #ffeb3b, #ff9800);
+    border-radius: 50% 50% 20% 20%;
+    position: absolute; top: -22px; left: -3px;
+    filter: drop-shadow(0 0 12px orange);
+    animation: flicker 0.1s infinite alternate;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#flame.blown { transform: rotate(60deg) translateX(30px) scale(0); opacity: 0; }
+@keyframes flicker { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+/* AMPLOP */
+.envelope-wrapper {
+    text-align: center;
+    perspective: 1000px;
+}
+
+.envelope-card { 
+    position: relative; 
+    width: 280px; 
+    height: 180px; 
+    background: #ff758c; /* Warna badan amplop */
+    border-radius: 0 0 15px 15px; 
+    margin: 0 auto; 
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Penutup Utama (Bawah) - Biar surat kelihatan keluar dari dalem */
+.envelope-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    z-index: 6;
+    border-radius: 0 0 15px 15px;
+}
+
+/* Tutup Atas (Yang bakal kebuka) */
+.env-top { 
+    position: absolute; 
+    top: 0; left: 0; 
+    width: 0; height: 0; 
+    border-left: 140px solid transparent; 
+    border-right: 140px solid transparent; 
+    border-top: 100px solid #ff4d6d; /* Warna tutup */
+    z-index: 10; 
+    transform-origin: top; 
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* Isi Surat */
+.env-letter { 
+    position: absolute; 
+    bottom: 5px; 
+    left: 15px; 
+    right: 15px; 
+    height: 150px; 
+    background: white; 
+    border-radius: 8px; 
+    z-index: 5; /* Di bawah penutup tapi di atas background */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    transition: transform 0.5s ease; 
+    font-family: 'Caveat', cursive;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* HOVER EFFECT */
+.envelope-card:hover .env-top { 
+    transform: rotateX(180deg); 
+    z-index: 4; /* Pindah ke belakang saat terbuka */
+}
+
+.envelope-card:hover .env-letter { 
+    transform: translateY(-80px); 
+}
+
+.btn-open {
+    margin-top: 100px; /* Kasih space biar nggak tabrakan sama surat pas naik */
+}
+
+/* MAIN CARD (RESPONSIVE) */
+.main-card-wrapper { width: 100%; height: 100vh; overflow-y: auto; padding: 40px 0; scrollbar-width: none; }
+.main-card-wrapper::-webkit-scrollbar { display: none; }
+.main-card { max-width: 420px; margin: 0 auto; height: fit-content; }
+.main-title { font-size: 3.5rem; color: #ff4d6d; }
+.message-box { background: rgba(255,255,255,0.6); padding: 25px; border-radius: 25px; border: 1.5px dashed var(--accent); margin: 25px 0; text-align: left; }
+.swiper { border-radius: 25px; margin-top: 20px; }
+.swiper-slide img { width: 100%; height: 350px; object-fit: cover; }
+
+/* TOMBOL */
+.btn-open, .btn-last { width: 100%; padding: 18px; border-radius: 50px; border: none; background: var(--primary); color: white; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+.btn-last { background: #ff4d6d; margin-bottom: 50px; }
+.btn-open:hover { transform: scale(1.05); background: #ff4d6d; }
+
+#white-out { position: fixed; inset: 0; background: white; z-index: 9999; opacity: 0; visibility: hidden; transition: 0.8s; }
+#white-out.active { opacity: 1; visibility: visible; }
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+
+/* Untuk layar sedang (Tablet) dan besar (Laptop/Desktop) */
+@media (min-width: 768px) {
+    .glass-container, .main-card {
+        max-width: 600px; /* Card jadi lebih lebar di laptop */
+        padding: 50px;
+    }
+
+    .main-title {
+        font-size: 5rem; /* Nama "Valencia" jadi makin gede & cakep */
+    }
+
+    .sub-title {
+        font-size: 1.5rem;
+    }
+
+    .message-box p {
+        font-size: 1.2rem; /* Text surat lebih enak dibaca */
+        line-height: 1.6;
+    }
+
+    .cake {
+        transform: scale(1.2); /* Kue digedein dikit */
+        margin: 40px auto;
+    }
+
+    .envelope-card {
+        transform: scale(1.3); /* Amplop digedein biar nggak imut banget */
+        margin-bottom: 60px;
+    }
+
+    .btn-open, .btn-last {
+        font-size: 1.1rem;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Untuk layar sangat lebar (Monitor Gede) */
+@media (min-width: 1200px) {
+    .glass-container, .main-card {
+        max-width: 800px;
+    }
+    
+    .swiper-slide img {
+        height: 500px; /* Foto memori jadi makin jelas */
+    }
+}

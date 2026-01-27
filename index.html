@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD CIA! ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <div id="stage-gift" class="stage active">
+        <div class="glass-container">
+            <p class="chat-text">ada Kado nihhh, coba buka duluu🎁</p>
+            <div class="gift-box" onclick="toCake()">
+                <div class="lid"></div>
+                <div class="box-body">
+                    <div class="ribbon-v"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stage-cake" class="stage">
+        <div class="glass-container">
+            <h2 class="title-text">Cieee yangg ultahhh</h2>
+            <br>
+            <h2 class="title-text">Make a Wish Duluuuu yaa! ✨</h2>
+            <div class="cake" onclick="blowCandle()">
+                <div class="layer-cake"></div>
+                <div class="icing"></div>
+                <div class="candle">
+                    <div id="flame"></div>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">(Klik kuenya untuk tiup lilin!)</p>
+        </div>
+    </div>
+
+    <div id="stage-envelope" class="stage">
+        <div class="envelope-wrapper">
+            <div class="envelope-card" onclick="toMain()">
+                <div class="env-top"></div>
+                <div class="envelope-body">
+                    <div class="env-letter">
+                        <p>Click to Open</p>
+                        <p style="font-size: 0.9rem;">Special Message Inside 💌</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-open" onclick="toMain()">ASEEKK, BACA SURATNYA DULU YAA 💌</button>
+        </div>
+    </div>
+
+    <div id="stage-main" class="stage">
+        <div class="main-card-wrapper">
+            <div class="main-card">
+                <div class="header-section">
+                    <div class="floating-emoji">🎊</div>
+                    <p class="sub-title">Happy 16th Birthday, YAYAAAA</p>
+                    <h1 class="main-title">✨cia!✨</h1>
+                </div>
+
+                <div class="message-box">
+                    <p>"Cia, gila ya udah 16 aja! Dari semua hal random yang kita lalui, lo tetep jadi temen yang paling asik. Semoga di umur baru ini lo makin bahagia, makin pinter, dan tetep jadi Cia yang gue kenal. Makasih udah jadi temen terbaik gue. HBD ya! 🎉"</p>
+                    <p class="sign">- Kleon -</p>
+                </div>
+
+                <div class="memory-zone">
+                    <p class="label">Captured Memories</p>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="Assets/IMG-20260103-WA0029.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/IMG_20260110_132233.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/IMG_20260127_222406.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/IMG_20260127_223222.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/Screenshot_2025-12-14-23-58-49-425_com.instagram.android.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/Screenshot_2025-12-28-21-18-36-551_com.instagram.android.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/Screenshot_2025-12-31-21-32-59-469_com.instagram.android.jpg.jpeg"></div>
+                            <div class="swiper-slide"><img src="Assets/Screenshot_2026-01-12-00-16-11-648_com.instagram.android.jpg.jpeg"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <button class="btn-last" onclick="finalBlast()">SHARE KEBAHAGIAAN INI! 🥳</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="white-out"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
